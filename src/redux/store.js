@@ -1,4 +1,4 @@
-import {configureStore} from 'redux-toolkit'
+import {configureStore} from '@reduxjs/toolkit'
 import authReducer from './slices/authSlice'
 import jobReducer from './slices/jobSlice'
 import uiRedicer from './slices/uiSlice'

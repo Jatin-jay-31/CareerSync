@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
-import { fetchJobs,updateJob,deleteJob,fetchSingleJob,createJob } from '../thunks/jobThunks';
+import { fetchJobs,updateJob,deleteJob,createJob } from '../thunks/jobThunks';
 
 const initialState={
     jobs: [],

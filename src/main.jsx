@@ -8,12 +8,13 @@ import {Provider} from 'react-redux'
 import Dashboard from './pages/Dashboard.jsx'
 import Login from './pages/Login.jsx'
 import Signup from './pages/Signup.jsx'
-import Settings from './pages/Settings.jsx'
 import Resumes from './pages/Resumes.jsx'
+import Profile from './pages/Profile.jsx'
 import Jobs from './pages/Jobs.jsx'
 import JobDetails from './pages/JobDetails.jsx'
 import ResumeDetails from './pages/ResumeDetails.jsx'
-import Protected from './components/layout/AuthLayout.js'
+import Protected from './components/layout/AuthLayout.jsx'
+import Home from './pages/Home.jsx'
 
 const router= createBrowserRouter(
   [
@@ -23,7 +24,7 @@ const router= createBrowserRouter(
     children: [
       {
         path: "/",
-        element: <Dashboard/>
+        element: <Home/>
       },
       {
         path: "login",
@@ -38,15 +39,21 @@ const router= createBrowserRouter(
         </Protected>)
       },
       {
+        path: "dashboard",
+        element: (<Protected authentication>
+          <Signup/>
+        </Protected>)
+      },
+      {
         path: "resumes",
         element: (<Protected authentication>
           <Resumes/>
         </Protected>)
       },
       {
-        path: "settings",
+        path: "Profile",
         element: (<Protected authentication>
-          <Settings/>
+          <Profile/>
         </Protected>)
       },
       {
