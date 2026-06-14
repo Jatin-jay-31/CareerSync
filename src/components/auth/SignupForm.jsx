@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { Button, Logo, Input } from '../index'
 import toast from "react-hot-toast"
-import { currentUser, loginUser, signupUser,loginWithGitHub,loginWithGoogle } from '../../redux/thunks/authThunks'
+import { loginUser, signupUser,loginWithGitHub,loginWithGoogle } from '../../redux/thunks/authThunks'
 import googleLogo from "../../assets/google-icon.svg";
 import githubLogo from "../../assets/github-icon.svg";
 

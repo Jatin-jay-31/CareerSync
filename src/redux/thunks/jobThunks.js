@@ -14,7 +14,7 @@ export const fetchJobs= createAsyncThunk(
 )
 export const createJob= createAsyncThunk(
     "jobs/createJob",
-    async ({userId,companyName,position,jobLink,status,notes},thunkAPI)=>{
+    async ({userId,companyName,position,jobLink,status,notes,dateApplied,location},thunkAPI)=>{
         try{
             const jobData= await jobService.createJobEntry({
                 userId,
@@ -22,7 +22,9 @@ export const createJob= createAsyncThunk(
                 position,
                 jobLink,
                 status,
-                notes
+                notes,
+                dateApplied,
+                location
             })
             return jobData
         } catch(error){
@@ -34,7 +36,7 @@ export const deleteJob= createAsyncThunk(
     "jobs/deleteJob",
     async (jobId,thunkAPI)=>{
         try{
-            const jobRef= await jobService.deleteJob(jobId)
+            const jobRef= await jobService.deleteJobEntry(jobId)
             return jobRef
         } catch(error){
             return thunkAPI.rejectWithValue(error.message)
@@ -45,8 +47,11 @@ export const updateJob= createAsyncThunk(
     "jobs/updateJob",
     async ({jobId,updatedData},thunkAPI)=>{
         try{
-            const jobRef= await jobService.updateJob(jobId, updatedData)
-            return jobRef
+            await jobService.updateJobEntry(jobId, updatedData)
+            return {
+        id: jobId,
+        ...updatedData
+      }
         } catch(error){
             return thunkAPI.rejectWithValue(error.message)
         }

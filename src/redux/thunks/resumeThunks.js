@@ -14,17 +14,19 @@ export const fetchResumes= createAsyncThunk(
         
     }
 )
-export const updateResume= createAsyncThunk(
-    'resumes/updateResume',
-    async ({resumeId,updatedData},thunkAPI) => {
-        try{
-            const updatedResume= await resumeService.updateResume(resumeId,updatedData)
+export const updateResume = createAsyncThunk(
+    "resumes/updateResume",
+    async ({ resumeId, updatedData }, thunkAPI) => {
+        try {
+            const updatedResume = await resumeService.updateResume(
+                resumeId,
+                updatedData
+            )
+
             return updatedResume
-        }
-        catch(error){
+        } catch (error) {
             return thunkAPI.rejectWithValue(error.message)
         }
-        
     }
 )
 export const deleteResume= createAsyncThunk(
@@ -40,16 +42,28 @@ export const deleteResume= createAsyncThunk(
         
     }
 )
-export const uploadResume= createAsyncThunk(
-    'resumes/uploadResume',
-    async ({userId,resumeFileUrl,resumeTitle,resumeText},thunkAPI) => {
-        try{
-            const uploadedData= await resumeService.createResume({userId,resumeFileUrl,resumeTitle,resumeText})
-            return uploadedData
-        }
-        catch(error){
-            return thunkAPI.rejectWithValue(error.message)
-        }
-        
+export const uploadResume = createAsyncThunk(
+  "resumes/uploadResume",
+  async (data, thunkAPI) => {
+    try {
+      const file = data.resumeFile?.[0]
+      if (!file) throw new Error("No file selected")
+
+      const userId = data.userId
+
+      const resumeFileUrl = await resumeService.uploadResumeFile(file, userId)
+
+      const resume = await resumeService.createResume({
+        userId,
+        resumeFileUrl,
+        resumeTitle: data.resumeTitle,
+        resumeText: data.resumeText || "",
+        targetRole: data.targetRole,
+      })
+
+      return resume 
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message)
     }
+  }
 )

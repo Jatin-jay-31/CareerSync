@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { loginUser, signupUser, logoutUser, loginWithGoogle, loginWithGitHub, currentUser } from '../thunks/authThunks'
+import { loginUser, signupUser, logoutUser, loginWithGoogle, loginWithGitHub } from '../thunks/authThunks'
 const initialState = {
     status: false,
     userData: null,
@@ -88,22 +88,6 @@ const authSlice = createSlice({
                 state.loading = false
                 state.error = action.error.message
                 state.status = true
-            })
-            .addCase(currentUser.pending, (state) => {
-                state.loading = true
-                state.error = null
-            })
-            .addCase(currentUser.fulfilled, (state, action) => {
-                state.loading = false
-                state.userData = action.payload
-                state.status = true
-                state.error = null
-            })
-            .addCase(currentUser.rejected, (state, action) => {
-                state.loading = false
-                state.error = action.error.message
-                state.status = false
-                state.userData = null
             })
     }
 

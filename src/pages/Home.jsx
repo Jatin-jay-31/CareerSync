@@ -1,6 +1,13 @@
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
 
 function Home() {
+  const authStatus = useSelector((state) => state.auth.status);
+
+  if (authStatus) {
+    return <Navigate to="/dashboard" replace />;
+  }
   return (
     <div className="min-h-screen bg-white">
 

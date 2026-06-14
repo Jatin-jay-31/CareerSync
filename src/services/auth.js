@@ -42,14 +42,6 @@ class AuthService {
             throw error;
         }
     }
-    async getCurrentUser() {
-        try {
-            return auth.currentUser
-        } catch (error) {
-            throw error;
-        }
-    }
-
     async signInWithGoogle() {
         try {
             const provider = new GoogleAuthProvider()

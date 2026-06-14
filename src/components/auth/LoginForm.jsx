@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useForm } from "react-hook-form"
 import { useDispatch, useSelector } from 'react-redux'
-import { currentUser, loginUser, loginWithGitHub, loginWithGoogle } from '../../redux/thunks/authThunks'
+import { loginUser, loginWithGitHub, loginWithGoogle } from '../../redux/thunks/authThunks'
 import { Link, useNavigate } from 'react-router-dom'
 import { Button, Input, Logo } from '../index'
 import toast from 'react-hot-toast'

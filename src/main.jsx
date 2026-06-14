@@ -11,10 +11,11 @@ import Signup from './pages/Signup.jsx'
 import Resumes from './pages/Resumes.jsx'
 import Profile from './pages/Profile.jsx'
 import Jobs from './pages/Jobs.jsx'
-import JobDetails from './pages/JobDetails.jsx'
-import ResumeDetails from './pages/ResumeDetails.jsx'
+import JobDetails from './components/jobs/JobDetails.jsx'
+import EditResume from './components/resumes/EditResume.jsx'
 import Protected from './components/layout/AuthLayout.jsx'
 import Home from './pages/Home.jsx'
+import EditJob from './components/jobs/EditJob.jsx'
 
 const router= createBrowserRouter(
   [
@@ -41,7 +42,7 @@ const router= createBrowserRouter(
       {
         path: "dashboard",
         element: (<Protected authentication>
-          <Signup/>
+          <Dashboard/>
         </Protected>)
       },
       {
@@ -51,7 +52,7 @@ const router= createBrowserRouter(
         </Protected>)
       },
       {
-        path: "Profile",
+        path: "profile",
         element: (<Protected authentication>
           <Profile/>
         </Protected>)
@@ -69,9 +70,15 @@ const router= createBrowserRouter(
         </Protected>)
       },
       {
-        path: "resumes/:resumeId",
+        path: "jobs/edit/:jobId",
         element: (<Protected authentication>
-          <ResumeDetails/>
+          <EditJob/>
+        </Protected>)
+      },
+      {
+        path: "resumes/edit/:resumeId",
+        element: (<Protected authentication>
+          <EditResume/>
         </Protected>)
       },
 

@@ -58,15 +58,3 @@ export const logoutUser = createAsyncThunk(
     }
 
 )
-export const currentUser = createAsyncThunk(
-    "auth/currentUser",
-    async (_, thunkAPI) => {
-        try {
-            return await authService.getCurrentUser()
-        }
-        catch (error) {
-            return thunkAPI.rejectWithValue(error.message)
-        }
-    }
-
-)

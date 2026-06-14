@@ -2,74 +2,52 @@ import { useState, useEffect } from 'react'
 import './App.css'
 import { Outlet } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { Header,Footer } from './components/index'
-import Container from  './components/layout/Container'
+import { Header, Footer } from './components/index'
+import Container from './components/layout/Container'
 import { Toaster } from "react-hot-toast"
-import { currentUser, loginUser, logoutUser } from './redux/thunks/authThunks'
+import { logoutUser } from './redux/thunks/authThunks'
+import { auth } from './services/firebase'
+import { onAuthStateChanged, setPersistence, browserSessionPersistence } from 'firebase/auth'
 
 function App() {
-  const [loading,setLoading]=useState(true)
-  const authStatus= useSelector((state)=> state.auth.status)
-  const dispatch= useDispatch()
+  const [loading, setLoading] = useState(true)
+  const dispatch = useDispatch()
 
-useEffect(() => {
+  useEffect(() => {
+    
+    // 🔥 THIS IS THE FIX (SESSION ONLY LOGIN)
+    setPersistence(auth, browserSessionPersistence)
 
-  let isMounted = true
-
-  const init = async () => {
-
-    try {
-
-      const userData = await dispatch(currentUser)
-
-      if (!isMounted) return
-
-      if (userData) {
-
-        const safeData = {
-          $id: userData.$id,
-          email: userData.email
-        }
-
-        dispatch(
-          loginUser({
-            userData: safeData
-          })
-        )
-
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        dispatch({
+          type: "auth/loginUser/fulfilled",
+          payload: {
+            uid: user.uid,
+            email: user.email,
+            displayName: user.displayName,
+            photoURL: user.photoURL
+          }
+        })
       } else {
         dispatch(logoutUser())
       }
 
-    } catch (err) {
+      setLoading(false)
+    })
 
-      dispatch(logoutUser())
+    return () => unsubscribe()
 
-    } finally {
-
-      if (isMounted) {
-        setLoading(false)
-      }
-
-    }
-  }
-
-  init()
-
-  return () => {
-    isMounted = false
-  }
-
-}, [])
+  }, [dispatch])
 
   return !loading ? (
     <>
-    <Toaster position="top-center" />
+      <Toaster position="top-center" />
       <Container>
-      <div className="flex items-center flex-col " >
-        <Header />
-        <Outlet/>
-        <Footer/>
+        <div className="flex items-center flex-col">
+          <Header />
+          <Outlet />
+          <Footer />
         </div>
       </Container>
     </>
