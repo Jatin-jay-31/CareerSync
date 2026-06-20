@@ -7,29 +7,16 @@ const initialState = {
     loading: false,
     uploadProgress: 0,
     error: null,
-    aiAnalysis: {
-        matchScore: 0,
-        missingSkills: [],
-        suggestions: ""
-    }
 }
 
 const resumeSlice = createSlice({
     name: 'resume',
     initialState,
     reducers: {
-        setAiAnalysis: (state, action) => {
-            state.aiAnalysis = { ...state.aiAnalysis, ...action.payload }
-        },
         resetResume: (state) => {
             state.uploading = false
             state.uploadProgress = 0
             state.error = null
-            state.aiAnalysis = {
-                matchScore: 0,
-                missingSkills: [],
-                suggestions: ""
-            }
         }
 
     },

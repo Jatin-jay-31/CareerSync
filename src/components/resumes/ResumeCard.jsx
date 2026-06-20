@@ -105,7 +105,7 @@ function ResumeCard({ resume }) {
                 <Button
                     className="flex-1 bg-slate-800 text-white hover:bg-slate-900"
                     onClick={() =>
-                        navigate(`/resumes/analysis/${resume.id}`)
+                        navigate(`/resumes/ai-analysis/${resume.id}`)
                     }
                 >
                     Analyze

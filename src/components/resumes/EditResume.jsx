@@ -59,6 +59,20 @@ function ResumeEditPage() {
 
             {/* HEADER */}
             <div className="mb-6">
+                <button
+                        onClick={() => navigate("/resumes")}
+                        className="
+            flex
+            items-center
+            gap-2
+            text-slate-500
+            hover:text-slate-900
+            transition
+            font-medium
+            "
+                    >
+                        ← Back to Resumes
+                    </button>
                 <h1 className="text-2xl font-bold text-slate-800">
                     Resume Editor
                 </h1>

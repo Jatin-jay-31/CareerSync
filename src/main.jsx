@@ -16,6 +16,8 @@ import EditResume from './components/resumes/EditResume.jsx'
 import Protected from './components/layout/AuthLayout.jsx'
 import Home from './pages/Home.jsx'
 import EditJob from './components/jobs/EditJob.jsx'
+import AiAnalysis from './pages/AiAnalysis.jsx'
+import Analysis from './components/ai/Analysis.jsx'
 
 const router= createBrowserRouter(
   [
@@ -79,6 +81,18 @@ const router= createBrowserRouter(
         path: "resumes/edit/:resumeId",
         element: (<Protected authentication>
           <EditResume/>
+        </Protected>)
+      },
+      {
+        path: "resumes/ai-analysis/:resumeId",
+        element: (<Protected authentication>
+          <Analysis/>
+        </Protected>)
+      },
+      {
+        path: "ai-analysis",
+        element: (<Protected authentication>
+          <AiAnalysis/>
         </Protected>)
       },
 

@@ -83,4 +83,4 @@ duration-200
   )
 }
 
-export default React.memo(JobCard)
+export default JobCard

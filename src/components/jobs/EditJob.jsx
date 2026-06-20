@@ -65,9 +65,24 @@ function EditJob() {
 
         {/* HEADER */}
         <div className="mb-6 max-w-6xl mx-auto">
+            <button
+                        onClick={() => navigate("/jobs")}
+                        className="
+            flex
+            items-center
+            gap-2
+            text-slate-500
+            hover:text-slate-900
+            transition
+            font-medium
+            "
+                    >
+                        ← Back to Jobs
+                    </button>
             <h1 className="text-2xl font-bold text-slate-800">
                 Edit Job
             </h1>
+            
             <p className="text-sm text-slate-500">
                 Update job details and tracking information
             </p>
